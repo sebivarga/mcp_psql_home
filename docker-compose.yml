@@ -1,0 +1,20 @@
+services:
+  pg-mcp-server:
+    build: .
+    container_name: pg-mcp-server
+    restart: unless-stopped
+    ports:
+      - "3000:3000"          # Change left side if port 3000 is taken
+    environment:
+      - PG_HOST=${PG_HOST}
+      - PG_PORT=${PG_PORT:-5432}
+      - PG_DATABASE=${PG_DATABASE}
+      - PG_USER=${PG_USER}
+      - PG_PASSWORD=${PG_PASSWORD}
+      - PG_SSL=${PG_SSL:-false}
+      - PORT=3000
+    # If your Postgres runs in another Docker network, add:
+    # networks:
+    #   - your_existing_network
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"  # access host machine's Postgres
